@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using NET_Mom4.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,7 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // DB Connection
-
+builder.Services.AddDbContext<TrackContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("MySqlTrackString"), new MySqlServerVersion(new Version())));
 
 var app = builder.Build();
 
